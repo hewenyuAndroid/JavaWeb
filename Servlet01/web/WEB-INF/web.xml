@@ -8,10 +8,15 @@
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>com.example.servlet.HelloServlet</servlet-class>
     </servlet>
-    
+
+    <!--
+        一个 servlet 标签可以对应多个 servlet-mapping 标签
+        一个 servlet-name 可以配置多个 url-pattern
+    -->
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello_servlet</url-pattern>
+        <url-pattern>/hello</url-pattern>
     </servlet-mapping>
     
 </web-app>
