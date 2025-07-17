@@ -1,0 +1,113 @@
+# ================ 核心规则 ================
+### 自动生成的文件 ###
+*.class
+*.log
+*.ctxt
+*.tmp
+*.bak
+*.swp
+*~
+*.orig
+*.rej
+
+### 构建输出 ###
+target/
+build/
+out/
+bin/
+!**/mvnw
+!**/mvnw.cmd
+!**/.mvn/wrapper/maven-wrapper.jar
+
+### 依赖管理 ###
+**/dependency-reduced-pom.xml
+**/pom.xml.*
+!pom.xml
+
+# ================ IDE 配置 ================
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.ipr
+*.iws
+**/modules.xml
+**/workspace.xml
+**/navEditor*
+**/uiDesigner.xml
+
+### Eclipse ###
+.settings/
+.classpath
+.project
+.factorypath
+bin/
+
+### VS Code ###
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# ================ 前端资源 ================
+### Node/Yarn ###
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+bower_components/
+.cache/
+.parcel-cache/
+dist/
+
+### Web 静态资源 ###
+**/src/main/webapp/assets/dist/
+**/src/main/webapp/WEB-INF/views/**/*.class
+
+# ================ 数据库 & 本地环境 ================
+*.db
+*.sqlite
+*.h2.db
+hsql/
+derby.log
+activemq-data/
+tomcat/
+jetty/
+
+# ================ 测试 & 报告 ================
+test-results/
+reports/
+coverage/
+jacoco.exec
+surefire-reports/
+failsafe-reports/
+*.jfr
+
+# ================ 开发工具 ================
+### Maven ###
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
+
+### 热部署 ###
+rebel.xml
+hotswap-agent.properties
+
+### 其他工具 ###
+.springBeans
+.scannerwork/
+sonar-project.properties
+
+# ================ 操作系统文件 ================
+.DS_Store
+Desktop.ini
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+
+# ================ 必须保留的例外 ================
+!**/src/main/resources/META-INF/
+!**/src/main/resources/application*.yml
+!**/src/main/resources/application*.properties
+!**/src/main/resources/static/
+!**/src/main/resources/templates/
+!**/src/main/webapp/WEB-INF/web.xml
