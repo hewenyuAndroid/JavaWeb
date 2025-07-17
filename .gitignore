@@ -71,7 +71,7 @@ dist/
 hsql/
 derby.log
 activemq-data/
-tomcat/
+#tomcat/
 jetty/
 
 # ================ 测试 & 报告 ================
