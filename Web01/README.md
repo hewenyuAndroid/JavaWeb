@@ -98,7 +98,39 @@
 ![访问Servlet](./imgs/create_web_09_3_open_in_browser.png)
 
 
+# Idea 拉取项目后如何跑起来
 
+1. 从git上拉取项目
+2. 使用 idea 打开项目，此时idea无法识别到子module
 
+![idea打开clone下来的项目](./imgs/clone_web_01.png)
+
+3. 打开 `project structure  -> modules` 重新new一个同名的module
+
+![new一个新的module](./imgs/clone_web_02_new_module.png)
+
+![new的module信息跟子module保持一致](./imgs/clone_web_03_new_module_info.png)
+
+4. 为新new的module添加tomcat依赖
+
+![添加tomcat依赖](./imgs/clone_web_04_add_tomcat_dependencies.png)
+
+5. 为新new的module添加web配置
+
+![添加web配置](./imgs/clone_web_05_add_web_config.png)
+
+配置后的信息如下
+
+![web配置信息](./imgs/clone_web_06_add_web_config_info.png)
+
+6. 添加 artifact 配置
+
+![添加 artifact 配置](./imgs/clone_web_07_add_artifact.png)
+
+配置后的信息如下
+
+![artifact 配置](./imgs/clone_web_08_add_artifact_info.png)
+
+7. 后续正常配置 tomcat 即可
 
 
