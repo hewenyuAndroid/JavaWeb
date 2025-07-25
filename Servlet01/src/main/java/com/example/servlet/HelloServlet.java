@@ -12,7 +12,11 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Hello Servlet01 get");
-        resp.getWriter().println("Hello Servlet01 get");
+
+        // 读取初始化配置参数
+        String initUrl = getServletConfig().getInitParameter("url");
+
+        resp.getWriter().println("Hello Servlet01 get, initUrl=" + initUrl);
     }
 
     @Override

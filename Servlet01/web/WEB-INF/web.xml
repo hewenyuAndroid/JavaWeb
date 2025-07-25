@@ -7,6 +7,11 @@
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>com.example.servlet.HelloServlet</servlet-class>
+        <!-- 配置Servlet初始化参数 -->
+        <init-param>
+            <param-name>url</param-name>
+            <param-value>http://127.0.0.1</param-value>
+        </init-param>
     </servlet>
 
     <!--

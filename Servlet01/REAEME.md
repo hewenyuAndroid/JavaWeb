@@ -31,7 +31,29 @@ servlet 生命周期如下
 5. `tomcat` 容器中，已经定义了一些随系统启动实例化的 `servlet`，自定义的 `servlet` 的 `load-on-startup` 尽量不要使用 `1~5`;
 
 
+# `ServletConfig` 和 `ServletContext`
 
+## `ServletConfig`
 
+`ServletConfig` 是为 `Servlet` 提供初始配置参数的对象，每个 `Servlet` 都有自己独立且唯一的 `ServletConfig` 对象;
+
+`Servlet` 容器会为每个 `Servlet` 实例化一个 `ServletConfig` 对象，并通过 `Servlet.init(ServletConfig config)` 生命周期回调函数传递给 `Servlet` 对象;
+
+```java
+package jakarta.servlet;
+
+import java.util.Enumeration;
+
+public interface ServletConfig {
+    // 获取 Servlet 的名称，在 web.xml 配置文件中 <servlet-name> 标签中的名称
+    String getServletName();
+    // 获取 ServletContext 对象
+    ServletContext getServletContext();
+    // 根据名称获取 servlet 的初始化参数，在 web.xml 配置文件中 <init-params> 标签下定义的 key-value 数据对
+    String getInitParameter(String var1);
+    // 获取所有初始化参数名组成的 Enumeration 对象
+    Enumeration<String> getInitParameterNames();
+}
+```
 
 
