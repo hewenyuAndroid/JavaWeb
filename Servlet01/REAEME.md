@@ -27,7 +27,7 @@ servlet 生命周期如下
 1. 通过 生命周期 测试发现，`servlet` 对象在容器中是单例的;
 2. 容器是可以处理并发的用户请求的，每个请求在容器中都会开启一个线程;
 3. 多线程可能会使用相同的 `servlet` 对象，所以在 `servlet` 中不要轻易定义一些需要经常修改的成员变量;
-4. `load-on-startup` 中定义的正整数表示实例化顺序，如果数字重复了，容器自行解决实例化顺序问题，但是应该避免重复;
+4. `load-on-startup` 中定义的正整数表示实例化顺序，如果数字重复了，容器自行解决实例化顺序问题，但是应该避免重复，数字越小越先实例化;
 5. `tomcat` 容器中，已经定义了一些随系统启动实例化的 `servlet`，自定义的 `servlet` 的 `load-on-startup` 尽量不要使用 `1~5`;
 
 
@@ -55,5 +55,47 @@ public interface ServletConfig {
     Enumeration<String> getInitParameterNames();
 }
 ```
+
+
+## `ServletConfig` 和 `ServletContext`
+
+### `ServletConfig`
+
+- `ServletConfig` 为 `Servlet` 提供初始配置参数的一种对象，每个 `Servlet` 都有自己独立唯一的 `ServletConfig` 对象;
+- 容器会为每一个 `Servlet` 实例化一个 `ServletConfig` 对象，并通过 `Servlet` 生命周期的 `init(ServletConfig config)` 方法传入给 `Servlet`;
+
+```java
+public interface ServletConfig {
+    // 获取 <servlet-name>HelloServlet</servlet-name> 标签中定义的 servlet 名称
+    String getServletName();
+    // 获取 ServletContext 对象
+    ServletContext getServletContext();
+    // 根据 key 获取 <init-param></init-param> 中配置的 value
+    String getInitParameter(String var1);
+    // 获取所有的初始化配置键值对信息，封装在 Enumeration 对象中
+    Enumeration<String> getInitParameterNames();
+}
+```
+
+### `ServletContext`
+
+- `ServletContext` 对象为 `Servlet` 上下文对象;
+- 容器会为每一个 `app` 创建一个独立且唯一的 `ServletContext` 对象;
+- `ServletContext` 对象为所有的 `Servlet` 所共享;
+- `ServletContext` 对象可以为所有的 `Servlet` 提供初始配置参数;
+
+
+> 获取资源的磁盘路径 
+
+获取项目部署目录下的 dir 目录
+`getServletContext().getRealPath("dir")`
+
+> 获取项目的上下文路径
+
+项目的部署名称，也叫项目的上下文路径，在部署进入 `tomcat` 时所使用的路径，该路径是可能发生变化的，通过该 `api` 可以动态获取项目真实的上下文路径。
+
+`getServletContext().getContextPath()`
+
+
 
 
