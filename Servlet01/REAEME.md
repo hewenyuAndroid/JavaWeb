@@ -96,6 +96,20 @@ public interface ServletConfig {
 
 `getServletContext().getContextPath()`
 
+> 域对象的相关API
+
+- 域对象: 一些用于在一些特定范围内存储数据和传递数据的对象，不同范围称为不同的域，不同域对象代表不同的域，共享数据的范围也不同。
+- `ServletContext` 代表应用，所以 `ServletContext` 域也叫做应用域，是 `webapp` 中最大的域，可以在本应用内实现数据的共享和传递。
+- `webapp` 中的三大域对象，分别是 应用域、会话域、请求域。
+- 三大作用域对象都有如下API
+
+| API                                           | 功能         |
+|-----------------------------------------------|------------|
+| `void setAttribute(String key, Object value)` | 向域中存储/修改数据 
+| `Object getAttribute(String key)`             | 读取域中的数据    |
+| `void removeAttribute(String key)`            | 移除域中的数据    |
+
+
 
 
 
