@@ -81,10 +81,25 @@ public interface ServletConfig {
 
 ![请求转发客户端请求](./imgs/servlet_request_forwarder_browser.png)
 
-## 请求重定向
+## 响应重定向
 
-![请求重定向](./imgs/servlet_request_chong_ding_xiang.png)
+![响应重定向](./imgs/servlet_request_chong_ding_xiang.png)
 
+- 响应重定向通过 `HttpServletResponse` 对象的 `sendRedirect` 方法实现;
+- 响应重定向是服务端通过 `302` 响应码和路径，告诉客户端要客户端自己去找其他资源，是在服务端提示下的客户端行为;
+- 客户端至少发送了两次请求，客户端地址栏是要变化的;
+- 服务端产生了多对 请求/响应 对象，且请求和响应对象不会传递给下一个资源;
+- 因为全程产生了多个 `HttpServletRequest` 对象，所以请求参数不可以传递，请求域中的数据也不可以传递;
+- 重定向可以是其它 `Servlet` 动态资源，也可以是一些静态资源以实现页面跳转;
+- 重定向不可以给到 `WEB-INF` 目录下受保护的资源;
+- 重定向可以跳转到本项目以外的外部资源;
+
+![响应重定向到项目内部的动态资源](./imgs/servlet_response_redirect.png)
+
+可以看到 客户端发送了两次请求，原始请求地址的响应码为 302 ，表示当前需要客户端重定向，重定向的 URI 为 `redirect_target`
+
+
+注意: 请求转发 和 响应重定向都可以实现页面跳转的场景下，优先使用响应重定向实现;
 
 
 
