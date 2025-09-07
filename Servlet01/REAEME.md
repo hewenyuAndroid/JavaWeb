@@ -57,3 +57,35 @@ public interface ServletConfig {
 ```
 
 
+# 请求转发和响应重定向
+
+- 请求转发和响应重定向是web应用中间接访问项目资源的两种手段，也是 `servlet` 控制页面跳转的两种手段;
+- 请求转发通过 `HttpServletRequest` 实现，响应重定向通过 `HttpServletResponse` 实现;
+
+## 请求转发
+
+![请求转发](./imgs/servlet_request_zhuan_fa.png)
+
+- 请求转发通过 `HttpServletRequest` 对象获取请求转发器实现;
+- 请求转发是服务器内部的行为，对客户端是屏蔽的;
+- 客户端只发送了一次请求，客户端地址栏不变;
+- 服务器只产生了一对 请求/响应 对象，这一对请求和响应对象会继续传递给下一个资源;
+- 因为全程只有一个 `HttpServletRequest` 对象，所以请求参数也可以传递，请求域中的数据也可以传递;
+- 请求转发可以转发给其它 `servlet` 动态资源，也可以转发给一些静态资源以实现页面跳转;
+- 请求转发可以转发给 `WEB-INF` 下受保护的资源;
+- 请求转发不能转发到本项目以外的外部资源;
+
+![请求转发执行日志](./imgs/servlet_request_forwarder.png)
+
+对于客户端来说，只执行了一次请求
+
+![请求转发客户端请求](./imgs/servlet_request_forwarder_browser.png)
+
+## 请求重定向
+
+![请求重定向](./imgs/servlet_request_chong_ding_xiang.png)
+
+
+
+
+
