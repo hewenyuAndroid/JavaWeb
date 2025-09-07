@@ -7,13 +7,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Enumeration;
 
 /**
  * http报文内容日志输出的servlet
  */
-@WebServlet("/http_msg_logger")
-public class HttpMsgLoggerServlet extends HttpServlet {
+@WebServlet("/http_req_msg_logger")
+public class HttpRequestMsgLoggerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,7 +58,30 @@ public class HttpMsgLoggerServlet extends HttpServlet {
             System.out.println("请求头: 获取所有请求头 " + headerName + "=" + sb);
         }
 
+        // 请求
+
         resp.getWriter().write("HttpMsgLoggerServlet");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 通过 req.getParameter("") 可以获取表单数据，urlParameter 数据
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        System.out.println("username=" + username + ", password=" + password);
+
+        Enumeration<String> parameterNames = req.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String element = parameterNames.nextElement();
+            // req.getParameter() 如果存在多个key相同的值是时，只会返回第一个值
+            String parameter = req.getParameter(element);
+            System.out.println("通过遍历获取 parameter, key=" + element + ", value=" + parameter);
+
+            String[] parameterValues = req.getParameterValues(element);
+            System.out.println("通过遍历获取 parameter, key=" + element + ", values=" + Arrays.toString(parameterValues));
+        }
+
+        resp.getWriter().write("do HttpRequestMsgLoggerServlet post success.");
     }
 
 }
