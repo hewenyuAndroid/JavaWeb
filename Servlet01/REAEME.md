@@ -108,6 +108,17 @@ public interface ServletConfig {
 
 乱码问题产生的根本原因是 数据的编码和解码使用的不是同一个字符集，或者使用了不支持某个语言文字的字符集;
 
+### tomcat 控制台乱码
+
+![Tomcat控制台乱码](./imgs/servlet_luan_ma_tomcat_log_luan_ma.png)
+
+在 `tomcat10.1.7` 版本中，修改 `Tomcat/conf/logging.properties` 中，所有的 `UTF-8` 为 `GBK` 即可。
+
+![Tomcat控制台乱码处理](./imgs/servlet_luan_ma_tomcat_log_luan_ma_deal.png)
+
+`sout` 码，设 `JVM` 载 `.class` 文件时使用 `UTF-8` 集。
+
+
 
 
 
