@@ -119,6 +119,41 @@ public interface ServletConfig {
 `sout` 码，设 `JVM` 载 `.class` 文件时使用 `UTF-8` 集。
 
 
+### 请求乱码
+
+#### GET 请求乱码问题
+
+- GET 请求提交参数的方式是将参数放到 URL 后面，如果使用的不是`UTF-8`，那么会对参数进行 `URL` 编码处理;
+- HTML中的 `<meta charset='字符集'/>` 响了 `GET` 方式提交数的URL编码;
+- `Tomcat10.1.7` 的 `URI` 编码为 `UTF-8`;
+- 当 `GET` 方式提交的数 `URL` 编码和 `Tomcat10.1.7` 的 `URI` 编码不一时，就会出现乱码;
+
+> 解决方案
+
+1. 调整网页的编码和 tomcat 的保持一致
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>mock get乱码</title>
+</head>
+<body>
+```
+
+2. 调整 tomcat 的编码
+
+apache-tomcat-10.1.7\conf\server.xml
+
+```xml
+    <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443"
+			   URIEncoding="GBK"/>
+```
+
+
+
 
 
 
