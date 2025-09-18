@@ -1,6 +1,9 @@
 package com.example.schedule.dao;
 
 import com.example.schedule.pojo.SysSchedule;
+import lombok.NonNull;
+
+import java.util.List;
 
 /**
  * 日程管理dao层
@@ -14,5 +17,13 @@ public interface SysScheduleDao {
      * @return 数据库更新行数 <=0:添加失败 >0:添加成功
      */
     int addSchedule(SysSchedule schedule);
+
+    /**
+     * 查询所有的日程信息
+     *
+     * @return 日程信息列表
+     */
+    @NonNull
+    List<SysSchedule> qureyAll();
 
 }
