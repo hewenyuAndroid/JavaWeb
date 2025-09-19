@@ -56,4 +56,21 @@ public class DaoTest {
         System.out.println("result:" + list);
     }
 
+    @Test
+    public void testInsertSchedule() {
+        BaseDao baseDao = new BaseDao();
+        String sql = "insert into sys_schedule values(DEFAULT, ?,?,?)";
+        int count = baseDao.baseUpdate(sql, 1, "学习Java", 0);
+        System.out.println("count:" + count);
+    }
+
+    @Test
+    public void testDeleteSchedule() {
+        BaseDao baseDao = new BaseDao();
+        String sql = "delete from sys_schedule where uid = ?";
+        int count = baseDao.baseUpdate(sql, 1);
+        System.out.println("count:" + count);
+    }
+
+
 }
