@@ -6,6 +6,7 @@ import com.example.schedule.pojo.SysSchedule;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SysScheduleTest {
@@ -31,6 +32,13 @@ public class SysScheduleTest {
     public void testQueryAll() {
         List<SysSchedule> list = sysScheduleDao.qureyAll();
         System.out.println("testQueryAll(): list=" + list);
+    }
+
+    @Test
+    public void testSplit() {
+        String uri = "/sys_schedule/add";
+        // [, sys_schedule, add]
+        System.out.println("testSplit(): uriSplit=" + Arrays.toString(uri.split("/")));
     }
 
 }

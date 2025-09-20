@@ -15,6 +15,14 @@
     </properties>
 
     <dependencies>
+        <!-- Tomcat 10 使用 Jakarta Servlet API -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -25,7 +33,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.2.21</version> <!-- 2025年最新稳定版本 -->
+            <version>1.2.16</version> <!-- 2025年最新稳定版本 -->
         </dependency>
 
         <dependency>
@@ -42,5 +50,6 @@
         </dependency>
 
     </dependencies>
+
 
 </project>

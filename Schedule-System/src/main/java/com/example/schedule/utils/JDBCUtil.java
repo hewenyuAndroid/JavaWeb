@@ -17,6 +17,7 @@ public class JDBCUtil {
 
     // 初始化连接池
     static {
+        System.out.println("JDBCUtil 初始化");
         // 可以帮助我们读取.properties配置文件
         Properties properties = new Properties();
         InputStream resourceAsStream = JDBCUtil.class.getClassLoader().getResourceAsStream("jdbc.properties");
