@@ -96,4 +96,20 @@ cookieToken.setPath("/servlet_session/servlet_c");
 
 ## `Session`
 
+## `HttpSession` 概述
+
+`HttpSession` 是一种保留更多信息在服务端的一种技术，服务器会为为每一个客户端开辟一块内存空间，即 `session` 对象。客户端在发送请求时，都可以使用自己的 `session` 。这样服务端就可以通过 `session` 来记录某个客户端的状态;
+
+- 服务端在为客户端创建 `session` 时，会同时将 `session` 对象的 `id`,即 `JSESSIONID` 以 `Cookie` 的形式放入响应对象;
+- 后端创建完 `session` 后，客户端会收到一个特殊的 `Cookie` ，叫做 `JSESSIONID`;
+- 客户端下一次请求时携带 `JSESSIONID`，后端收到后，根据 `JSESSIONID` 找到对应的 `session` 对象;
+- 通过该机制，服务端通过 `session` 就可以存储一些专门针对某个客户端的信息了;
+- `session` 也是域对象;
+
+![session原理图](./imgs/servlet-session-session.png)
+
+
+
+
+
 
