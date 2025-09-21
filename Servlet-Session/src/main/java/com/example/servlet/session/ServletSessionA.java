@@ -24,6 +24,10 @@ public class ServletSessionA extends HttpServlet {
         //              1.1.1.2 没找到，创建一个新的 session 返回，并且向 response 对象中存放一个 JSESESSIONID 的 cookie
         //      1.2. 如果没有，没找到，创建一个新的 session 返回，并且向 response 对象中存放一个 JSESESSIONID 的 cookie
         HttpSession session = req.getSession();
+
+        // 设置当前 session 的超时时间，单位 s
+        session.setMaxInactiveInterval(120);
+
         System.out.println("sessionId=" + session.getId());
         System.out.println("sessionIsNew=" + session.isNew());
         // 将 username 存入 session
