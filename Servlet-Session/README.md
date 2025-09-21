@@ -1,4 +1,3 @@
-
 # 会话
 
 ## 会话管理概述
@@ -7,8 +6,10 @@
 
 > HTTP是无状态协议
 
-- 无状态就是不保存状态，即无状态协议 (`stateless`)，`HTTP` 协议自身不对请求和响应之间的通信状态进行保存，也就是说，在 `HTTP` 协议这个级别，协议对于发送请求或者响应都不作持久化处理;
-- 简单理解，浏览器发送请求，服务器接收并相应，当时服务器不清楚这个请求来自于哪个浏览器，服务器没记录浏览器的特征(就是客户端的状态);
+- 无状态就是不保存状态，即无状态协议 (`stateless`)，`HTTP` 协议自身不对请求和响应之间的通信状态进行保存，也就是说，在 `HTTP`
+  协议这个级别，协议对于发送请求或者响应都不作持久化处理;
+- 简单理解，浏览器发送请求，服务器接收并相应，当时服务器不清楚这个请求来自于哪个浏览器，服务器没记录浏览器的特征(
+  就是客户端的状态);
 
 ### 会话实现的手段
 
@@ -51,29 +52,33 @@
 默认情况下 `Cookie` 的有效期是一次会话范围内，我们可以通过 `Cookie` 的 `setMaxAge()` 方法，让 `Cookie` 持久化保存到浏览器上;
 
 - 会话级 `Cookie`:
-  - 服务端没有明确设置 `Cookie` 的存在时间;
-  - 在浏览器端，`Cookie` 数据存在于内存中;
-  - 只要浏览器不关闭，`Cookie` 数据就会一直存在 (注意: 即使是关闭了当前tab，只要是浏览器没关闭，则 `Cookie` 依然会存在);
-  - 浏览器关闭，内存中的 `Cookie` 数据就会被释放;
+    - 服务端没有明确设置 `Cookie` 的存在时间;
+    - 在浏览器端，`Cookie` 数据存在于内存中;
+    - 只要浏览器不关闭，`Cookie` 数据就会一直存在 (注意: 即使是关闭了当前tab，只要是浏览器没关闭，则 `Cookie` 依然会存在);
+    - 浏览器关闭，内存中的 `Cookie` 数据就会被释放;
 - 持久化 `Cookie`:
-  - 服务器端明确设置了 `Cookie` 的存在时间;
-  - 在浏览器端，`Cookie` 数据会被保存到硬盘上;
-  - `Cookie` 在硬盘上存在的时间根据服务器端限定的时间来管控，不受浏览器关闭的影响;
-  - 持久化 `Cookie` 达到了预设的时间后会被释放;
+    - 服务器端明确设置了 `Cookie` 的存在时间;
+    - 在浏览器端，`Cookie` 数据会被保存到硬盘上;
+    - `Cookie` 在硬盘上存在的时间根据服务器端限定的时间来管控，不受浏览器关闭的影响;
+    - 持久化 `Cookie` 达到了预设的时间后会被释放;
 
 ```java
 Cookie cookieToken = new Cookie("token", "123");
 // 通过 Cookie.setMaxAge(expiry) 设置 cookie的持久化时间
 // expiry 的单位是秒，如果设置成 0 ，则表示将浏览器中保存的该 Cookie 删除
-cookieToken.setMaxAge(10);
-resp.addCookie(cookieToken);
+cookieToken.
+
+setMaxAge(10);
+resp.
+
+addCookie(cookieToken);
 ```
 
 ![浏览器中的持久化cookie](./imgs/servlet-session-cookie-cookie-expiry-in-browser.png)
 
 ### 设置 Cookie 的提交路径
 
- cookie 可以通过 `Cookie.setPath()` 方法设置只有对应 `path` 的资源才会携带当前 cookie
+cookie 可以通过 `Cookie.setPath()` 方法设置只有对应 `path` 的资源才会携带当前 cookie
 
 > step1 通过 servletA 向客户端段返回 `cookie` 并配置 cookie 的有效路径
 
@@ -81,9 +86,13 @@ resp.addCookie(cookieToken);
 Cookie cookieToken = new Cookie("token", "123");
 // 通过 Cookie.setMaxAge(expiry) 设置 cookie的持久化时间
 // expiry 的单位是秒，如果设置成 0 ，则表示将浏览器中保存的该 Cookie 删除
-cookieToken.setMaxAge(10*60);
+cookieToken.
+
+setMaxAge(10*60);
 // 设置cookie的提交路径，表示当前 cookie 只有在请求 /servlet_session/servlet_c 这个资源的时候才会被提交
-cookieToken.setPath("/servlet_session/servlet_c");
+cookieToken.
+
+setPath("/servlet_session/servlet_c");
 ```
 
 > step2 请求 `servletB` ，此时请求报文中不会携带 key 为 `token` 的 cookie
@@ -98,7 +107,8 @@ cookieToken.setPath("/servlet_session/servlet_c");
 
 ## `HttpSession` 概述
 
-`HttpSession` 是一种保留更多信息在服务端的一种技术，服务器会为为每一个客户端开辟一块内存空间，即 `session` 对象。客户端在发送请求时，都可以使用自己的 `session` 。这样服务端就可以通过 `session` 来记录某个客户端的状态;
+`HttpSession` 是一种保留更多信息在服务端的一种技术，服务器会为为每一个客户端开辟一块内存空间，即 `session`
+对象。客户端在发送请求时，都可以使用自己的 `session` 。这样服务端就可以通过 `session` 来记录某个客户端的状态;
 
 - 服务端在为客户端创建 `session` 时，会同时将 `session` 对象的 `id`,即 `JSESSIONID` 以 `Cookie` 的形式放入响应对象;
 - 后端创建完 `session` 后，客户端会收到一个特殊的 `Cookie` ，叫做 `JSESSIONID`;
@@ -108,8 +118,49 @@ cookieToken.setPath("/servlet_session/servlet_c");
 
 ![session原理图](./imgs/servlet-session-session.png)
 
+> 从 `HttpServletRequest` 中获取 `HttpSession` 对象，并写入数据
 
+```java
+HttpSession session = req.getSession();
+System.out.
 
+println("sessionId="+session.getId());
+        System.out.
+
+println("sessionIsNew="+session.isNew());
+// 将 username 存入 session
+        session.
+
+setAttribute("username",username);
+```
+
+服务端创建 `HttpSession` 后，通过 resp 返回了一个名为 `JSESSIONID` 的 `cookie`
+
+![返回JSESSIONID](./imgs/servlet-session-session-create-session-resp.png)
+
+> 从 `HttpServletRequest` 中获取 `HttpSession` 对象，并读取数据
+
+```java
+// 获取 session 对象
+HttpSession session = req.getSession();
+System.out.
+
+println("sessionId="+session.getId());
+
+// 读取 session 中存储的用户名
+Object username = session.getAttribute("username");
+System.out.
+
+println("read from session, username="+username);
+```
+
+客户端请求通过携带名为 `JSESSIONID` 的 `cookie` 告诉服务端，当前客户端对应的 `HttpSession` 对象是哪一个，服务端根据该 `sessionId` 找到对应的 `HttpSession` 对象，然后可以从该对象中读取对应的信息;
+
+![从HttpSession对象中读取数据](./imgs/servlet-session-session-req-read-session.png)
+
+从 `HttpServletRequest` 中获取 `HttpSession` 对象的流程
+
+![获取Session流程](./imgs/servlet-session-session-request-get-session.png)
 
 
 
