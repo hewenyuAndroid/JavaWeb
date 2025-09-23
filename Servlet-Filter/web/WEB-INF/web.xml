@@ -3,4 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+
+    <!-- 配置过滤器 -->
+    <filter>
+        <filter-name>logFilter</filter-name>
+        <filter-class>com.example.servlet.filter.LogFilter</filter-class>
+    </filter>
+
+    <!-- 配置过滤器拦截的路径 -->
+    <filter-mapping>
+        <filter-name>logFilter</filter-name>
+        <!--
+            url-pattern: 根据 servlet 的请求路径进行过滤
+                /*: 过滤所有资源
+                /a/*: 过滤以 /a 开头的所有资源
+                *.html: 过滤以 html 结尾的所有资源
+                /servlet_a: 过滤指定servlet资源
+            servlet-name: 根据 servlet 的别名，对指定的servlet资源进行拦截
+
+           在 filter-mapping 内部可以同时写多个 url-pattern 和 servlet-name 标签
+        -->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
