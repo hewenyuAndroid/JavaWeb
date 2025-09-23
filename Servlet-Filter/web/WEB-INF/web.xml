@@ -26,4 +26,19 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>lifeCycleFilter</filter-name>
+        <filter-class>com.example.servlet.filter.LifeCycleFilter</filter-class>
+        <!-- 配置初始化参数 -->
+        <init-param>
+            <param-name>filterParamKey</param-name>
+            <param-value>这是Servlet生命周期过滤器的初始化参数</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>lifeCycleFilter</filter-name>
+        <url-pattern>/servlet_lifecycle</url-pattern>
+    </filter-mapping>
+
 </web-app>
