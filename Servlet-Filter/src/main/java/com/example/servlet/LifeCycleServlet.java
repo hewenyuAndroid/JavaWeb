@@ -8,17 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/test_servlet")
-public class TestServlet extends HttpServlet {
+@WebServlet("/servlet_lifecycle")
+public class LifeCycleServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        resp.getWriter().write("test servlet");
+        resp.getWriter().write("servlet lifecycle");
     }
 
 }
