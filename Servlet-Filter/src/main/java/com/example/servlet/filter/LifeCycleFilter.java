@@ -7,10 +7,11 @@ import java.io.IOException;
 /**
  * Filter过滤器的生命周期
  * <p>
- * 1. 构造        构造器
- * 2. 初始化       init
- * 3. 过滤        doFilter
- * 4. 销毁        destroy
+ * Servlet 过滤器生命周期
+ * 1. 构造       构造器             项目启动时执行 (1次)
+ * 2. 初始化     init()            构造函数执行完毕，执行初始化 (1次)
+ * 3. 过滤       doFilter()        每次请求时，执行过滤函数 (n次)
+ * 4. 销毁       destroy()         服务关闭 (1次)
  */
 public class LifeCycleFilter implements Filter {
 
