@@ -18,6 +18,44 @@
 
 ![Servlet拦截器原理](./imgs/servlet-filter.png)
 
+## `web.xml` 配置过滤器
+
+```xml
+<!-- 配置过滤器 -->
+<filter>
+    <filter-name>logFilter</filter-name>
+    <filter-class>com.example.servlet.filter.LogFilter</filter-class>
+</filter>
+
+<!-- 配置过滤器拦截的路径 -->
+<filter-mapping>
+    <filter-name>logFilter</filter-name>
+    <!--
+        url-pattern: 根据 servlet 的请求路径进行过滤
+            /*: 过滤所有资源
+            /a/*: 过滤以 /a 开头的所有资源
+            *.html: 过滤以 html 结尾的所有资源
+            /servlet_a: 过滤指定servlet资源
+        servlet-name: 根据 servlet 的别名，对指定的servlet资源进行拦截
+
+       在 filter-mapping 内部可以同时写多个 url-pattern 和 servlet-name 标签
+    -->
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+
+- `<filter-mapping/>` 标签中定义了过滤器对哪些资源进行过滤;
+- 子标签 `<url-pattern/>` 通过映射的路径确定过滤的范围;
+  - 精确匹配 `/servletA`, 表示对 `/servletA` 资源的请求进行过滤;
+  - 模糊匹配 `*.html`，表示对以 `.html` 结尾的路径进行过滤;
+  - `/*` 表示对所有资源进行过滤;
+  - 一个 `<filter-mapping/>` 标签内部可以配置多个 `url-pattern`;
+- 子标签 `<servlet-name/>` 通过 `servlet` 别名确定对哪些 `servlet` 进行过滤;
+  - 使用该标签确定目标资源的前提是 `servlet` 起了别名;
+  - 一个 `<filter-mapping/>` 标签下可以定义多个 `<servlet-name/>`;
+  - 一个 `<filter-mapping/>` 标签下，`<servlet-name/>` 和 `<url-pattern/>` 标签可以同时存在;
+
+
 
 ## 过滤器链的顺序
 
