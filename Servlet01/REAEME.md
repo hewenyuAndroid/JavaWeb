@@ -172,7 +172,13 @@ public interface ServletConfig {
 
 ![Tomcat控制台乱码处理](./imgs/servlet_luan_ma_tomcat_log_luan_ma_deal.png)
 
-`sout` 码，设 `JVM` 载 `.class` 文件时使用 `UTF-8` 集。
+`sout` 乱码，设 `JVM` 载 `.class` 文件时使用 `UTF-8` 集。
+
+![Tomcat sout输出乱码](./imgs/servlet_luan_ma_tomcat_sout.png)
+
+输入内容 `-Dfile.encoding=UTF-8 -Dclient.encoding.override=UTF-8`
+
+![Tomcat控制台sout输出中文乱码处理](./imgs/servlet_luan_ma_tomcat_sout_deal.png)
 
 
 ### 请求乱码
