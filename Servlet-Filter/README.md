@@ -65,6 +65,8 @@
 - 每个过滤器的过滤范围不同，针对不同的资源来说，过滤器链中的过滤器个数可能是不同的;
 - 如果某个 `Filter` 是使用 `servlet-name` 进行匹配匹配规则的配置，那么这个 `Filter` 执行的优先级更低;
 
+![过滤器链执行顺序](./imgs/servlet-filter-chain-execution.png)
+
 ## 过滤器的生命周期
 
 过滤器作为 `web` 项目的组件之一，和 `servlet` 的生命周期类似，略有不同，没有 `servlet` 的 `load-on-startup` 配置，默认就是系统启动，立即构造;
