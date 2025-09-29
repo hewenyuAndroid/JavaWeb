@@ -1,33 +1,8 @@
-[toc]
+package com.example.servlet.listener;
 
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebListener;
 
-# 监听器
-
-## 监听器概述
-
-监听器专门用于对 **域对象** 身上身上发生的事件或状态改变进行监听和相应处理的对象;
-
-- 监听器是 `GOF` 设计模式中，观察者模式的典型案例;
-- 监听器使用的感受类似 JS 中的事件，被观察的对象发生某些情况时，自动触发代码的执行;
-- 监听器并不监听 web项目中的所有组件，仅仅是对三大域对象做相关的事件监听;
-
-监听器的分类, web 中定义八个监听器接口作为监听器的规范，这八个接口按照不同的标准可以形成不同的分类:
-
-> 按监听的对象划分:
-
-- `application` 域监听器 `ServletContextListener`、`ServletContextAttributeListener`;
-- `session` 域监听器 `HttpSessionListener`、`HttpSessionAttributeListener`、`HttpSessionBindingListener`、`HttpSessionActivationListener`;
-- `request` 域监听器 `ServletRequestListener`、`ServletRequestAttributeListener`;
-
-> 按监听的事件划分:
-
-- 域对象的创建和销毁监听器 `ServletContextListener`、`HttpSessionListener`、`ServletRequestListener`;
-- 域对象数据增删改事件监听器 `ServletContextAttributeListener`、`HttpSessionAttributeListener`、`ServletRequestAttributeListener`;
-- 其它监听器 `HttpSessionBingdingListener`、`HttpServletActivationListener`;
-
-> 应用域 `ServletContextListener`、`ServletContextAttributeListener` 的使用
-
-```java
 @WebListener
 public class MyApplicationListener implements ServletContextListener, ServletContextAttributeListener {
 
@@ -67,14 +42,3 @@ public class MyApplicationListener implements ServletContextListener, ServletCon
         System.out.println("MyApplicationListener: 应用域删除了数据 attributeRemoved(), servletContext: " + servletContext.hashCode() + ", key:" + name + ", value:" + value);
     }
 }
-```
-
-执行 启动应用 -> 添加数据 -> 再次添加数据 -> 删除数据 -> 关闭应用 操作，得到如下的监听器日志
-
-![应用域日志](./imgs/servlet_listener_application_domain_operation.png)
-
-
-
-
-
-
