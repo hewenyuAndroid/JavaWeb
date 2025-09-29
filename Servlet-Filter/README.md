@@ -55,7 +55,7 @@
   - 一个 `<filter-mapping/>` 标签下可以定义多个 `<servlet-name/>`;
   - 一个 `<filter-mapping/>` 标签下，`<servlet-name/>` 和 `<url-pattern/>` 标签可以同时存在;
 
-
+![过滤器内部拦截流程](./imgs/servlet-filter-execution-process.png)
 
 ## 过滤器链的顺序
 
@@ -64,5 +64,53 @@
 - 过滤器链中的过滤器的顺序由 `<filter-mapping>` 标签在 `web.xml` 中的顺序决定;
 - 每个过滤器的过滤范围不同，针对不同的资源来说，过滤器链中的过滤器个数可能是不同的;
 - 如果某个 `Filter` 是使用 `servlet-name` 进行匹配匹配规则的配置，那么这个 `Filter` 执行的优先级更低;
+
+## 过滤器的生命周期
+
+过滤器作为 `web` 项目的组件之一，和 `servlet` 的生命周期类似，略有不同，没有 `servlet` 的 `load-on-startup` 配置，默认就是系统启动，立即构造;
+
+| 阶段    | 对应方法                                                                     | 执行时机     | 执行次数 |
+|-------|--------------------------------------------------------------------------|----------|------|
+| 创建对象  | 构造函数                                                                     | web应用启动时 | 1    |
+| 初始化方法 | `void init(FilterConfig filterConfig)`                                   | 过滤器构造完毕  | 1    |
+| 过滤请求  | `doFilter(ServletRequest req, ServletResponsne resp, FilterChain chain)` | 每次请求     | 多次   |
+| 销毁    | `default void destroy()`                                                 | web应用关闭时 | 1    |
+
+
+`web` 程序启动后，过滤器的构造函数和初始化函数被立即执行;
+
+![过滤器构造函数和初始化函数执行](./imgs/servlet-filter-execute-constructor-and-init.png)
+
+发送请求，过滤器过滤请求
+
+![过滤器过滤请求](./imgs/servlet-filter-execute-do-filter.png)
+
+关闭容器，执行过滤器销毁
+
+![关闭容器，执行过滤器销毁函数](./imgs/servlet-filter-execute-destroy.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
