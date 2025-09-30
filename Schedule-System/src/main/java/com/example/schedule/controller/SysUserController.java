@@ -7,6 +7,7 @@ import com.example.schedule.utils.MD5Util;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -43,6 +44,9 @@ public class SysUserController extends BaseController {
         } else if (!dbUser.getUserPwd().equals(MD5Util.encrypt(sysUser.getUserPwd()))) {
             resp.sendRedirect("/Schedule_System/loginUserPwdError.html");
         } else {
+            // 将登录的用户信息存储到 session 中
+            HttpSession session = req.getSession();
+            session.setAttribute("user", sysUser);
             resp.sendRedirect("/Schedule_System/showSchedule.html");
         }
 
