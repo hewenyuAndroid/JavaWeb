@@ -116,3 +116,32 @@ public class MyApplicationListener implements ServletContextListener, ServletCon
 
 ![会话域监听器操作日志](./imgs/servlet_listener_session_domain_operation.png)
 
+
+## 请求域监听器 `ServletRequestListener`、`ServletRequestAttributeListener`
+
+> `ServletRequestListener` 监听 `ServletRequest` 对象的创建和销毁
+
+- `requestInitialized(ServletRequestEvent sre)`: `ServletRequest` 对象创建时调用;
+- `requestDestroyed(ServletRequestEvent sre)`: `ServletRequest` 对象销毁时调用;
+- `ServletRequestEvent`: 表示从 `ServletRequest` 对象上获取的事件，通过这个事件可以获取到触发事件的 `ServletRequest` 对象，此外还可以获取到当前 `web`应用的 `ServletContext` 对象;
+
+> `ServletRequestAttributeListener` 监听 `ServletRequest` 对象属性的添加、修改和删除;
+
+- `attributeAdded(ServletRequestAttributeEvent srae)`: 向 `ServletRequest` 中添加属性时调用;
+- `attributeReplaced(ServletRequestAttributeEvent srae)`: 修改 `ServletRequset` 中属性时调用;
+- `attributeRemoved(ServletRequestAttributeEvent srae)`: 删除 `ServletRequest` 中属性时调用;
+- `ServletRequestAttributeEvent`: 表示 `ServletRequest` 属性变化事件，包含方法如下:
+  - `String getName()`: 获取属性名称;
+  - `Object getValue()`: 获取属性值;
+  - `ServletRequest getServletRequest()`: 获取触发事件的 `ServletRequest` 对象;
+
+![请求域监听器请求日志](./imgs/servlet_listener_request_domain_operation.png)
+
+
+
+
+
+
+
+
+
