@@ -25,7 +25,24 @@
 - 域对象数据增删改事件监听器 `ServletContextAttributeListener`、`HttpSessionAttributeListener`、`ServletRequestAttributeListener`;
 - 其它监听器 `HttpSessionBingdingListener`、`HttpServletActivationListener`;
 
-> 应用域 `ServletContextListener`、`ServletContextAttributeListener` 的使用
+## 应用域监听器 `ServletContextListener`、`ServletContextAttributeListener` 的使用
+
+> `ServletContextListener` 监听 `ServletContext` 对象的创建和销毁
+
+- `contextInitialized(ServletContextEvent sce)`: `ServletContext` 创建时调用;
+- `contextDestroyed(ServletContextEvent sce): `ServletContext` 销毁时调用;
+- `ServletContextEvent`: 表示从 `ServletContext` 对象上捕获到的事件，通过这个事件可以获取到 `ServletContext` 对象;
+
+> `ServletContextAttributeListener` 监听 `ServletContext` 应用域对象属性的 添加、修改、删除操作;
+
+- `attributeAdded(ServletContextAttributeEvent event)`: 向 `ServletContext` 应用域中添加属性时调用;
+- `attributeReplaced(ServletContextAttributeEvent event)`: 当 `ServletContext` 应用域中的属性被修改时调用 (即插入的 `key` 已经存在时);
+- `attributeRemoved(ServletContextAttributeEvent event)`: 从 `ServletContext` 应用域中删除属性时调用;
+- `ServletContextAttributeEvent`: 表示属性变化事件，包含如下方法:
+  - `String getName()`: 获取添加/修改的属性的属性名;
+  - `Object getValue()`: 获取被修改/添加的属性值;
+  - `ServletContext getServletContext()`: 获取 `ServletContext` 对象;
+
 
 ```java
 @WebListener
@@ -71,10 +88,31 @@ public class MyApplicationListener implements ServletContextListener, ServletCon
 
 执行 启动应用 -> 添加数据 -> 再次添加数据 -> 删除数据 -> 关闭应用 操作，得到如下的监听器日志
 
-![应用域日志](./imgs/servlet_listener_application_domain_operation.png)
+![应用域监听器日志](./imgs/servlet_listener_application_domain_operation.png)
 
 
+## 会话域监听器 `HttpServletListener`、`HttpServletAttributeListener`
+
+> `HttpServletListener` 监听 `HttpSession` 对象的创建与销毁;
+
+- `sessionCreated(HttpSessionEvent hse)`: `HttpSession` 对象创建时调用;
+- `sessionDestroy(HttpSessionEvent hse)`: `HttpSession` 对象销毁时调用;
+- `HttpSessionEvent`: 表示从 `HttpSession` 对象上捕获到的事件，通过该对象可以获取到触发该事件的 `HttpSession` 对象;
 
 
+> `HttpSessionAttributeListener` 监听 `HttpSession` 中属性的添加、删除和修改;
 
+- `attributeAdded(HttpSessionBindingEvent se)`: 向 `HttpSession` 中添加属性时调用;
+- `attributeReplaced(HttpSessionBindingEvent se)`: 修改 `HttpSession` 中的属性时调用;
+- `attributeRemoved(HttpSessionBindingEvent se)`: 从 `HttpSession` 中移除属性时调用;
+- `HttpSessionBindingEvent`: 表示 `HttpSession` 属性变化的事件，包含如下方法:
+  - `String getName()`: 获取属性名称;
+  - `Object getValue()`: 获取属性值;
+  - `HttpSession getSession()`: 获取该事件对应的 `HttpSession` 对象;
+
+[会话域监听器代码 `MyHttpSessionListener`](./src/main/java/com/example/servlet/listener/MyHttpSessionListener.java)
+
+[会话域操作 servlet 相关代码](./src/main/java/com/example/servlet/session_domain)
+
+![会话域监听器操作日志](./imgs/servlet_listener_session_domain_operation.png)
 
