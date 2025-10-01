@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax测试页面</title>
+
+    <script>
+        function sendRequest() {
+            // 实例化一个 XmlHttpRequest
+            var request = new XMLHttpRequest()
+            // 设置 XmlHttpRequest 的回调函数
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    // 接收响应结果，处理结果
+                    const msg = request.responseText
+                    // alert("后端响应了:" + msg)
+
+                    var inputMsg = document.getElementById("input_msg");
+                    inputMsg.value = msg
+
+                }
+            }
+            // 设置发送请求的方式和请求的资源路径
+            request.open("GET", "/servlet_ajax/hello?username=zhangsan")
+            // 发送请求
+            request.send()
+        }
+    </script>
+
+</head>
+<body>
+
+<div>
+    <button onclick="sendRequest()">发送请求</button>
+</div>
+
+<div>
+    <input type="text" id="input_msg">
+</div>
+
+</body>
+</html>
