@@ -52,6 +52,19 @@ public class SysUserController extends BaseController {
 
     }
 
+    public void checkUsernameValid(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String username = req.getParameter("username");
+        if (username == null || username.isEmpty()) {
+            throw new RuntimeException("非法的用户名");
+        }
+        SysUser sysUser = userService.queryUserByUsername(username);
+        if (sysUser == null) {
+            resp.getWriter().write("ok");
+        } else {
+            resp.getWriter().write("用户名已被占用");
+        }
+    }
+
     private SysUser fetchParameterFromReq(HttpServletRequest req) {
         String username = req.getParameter("username");
         String userPwd = req.getParameter("userPwd");
